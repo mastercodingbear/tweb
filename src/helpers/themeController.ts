@@ -85,14 +85,14 @@ const colorMap: {
     'saved-color': '#359AD4'
   },
   night: {
-    'primary-color': '#8774E1',
-    'message-out-primary-color': '#8774E1',
-    'message-background-color': '#212121',
-    'surface-color': '#212121',
+    'primary-color': '#152651',
+    'message-out-primary-color': '#152651',
+    'message-background-color': '#24263b',
+    'surface-color': '#1e2035',
     'danger-color': '#ff595a',
     'primary-text-color': '#ffffff',
     'secondary-text-color': '#aaaaaa',
-    'saved-color': '#8774E1'
+    'saved-color': '#152651'
   }
 };
 
@@ -134,8 +134,10 @@ export class ThemeController {
     try {
       const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const checkDarkMode = () => {
+        const darkMode = document.body.classList.contains('dark-mode');
         // const theme = this.getTheme();
-        this.systemTheme = darkModeMediaQuery.matches ? 'night' : 'day';
+        this.systemTheme = darkMode ? 'night' : 'day';
+        // this.systemTheme = darkModeMediaQuery.matches ? 'day' : 'night';
         // const newTheme = this.getTheme();
 
         if(rootScope.myId) {
@@ -145,11 +147,33 @@ export class ThemeController {
         }
       };
 
-      if('addEventListener' in darkModeMediaQuery) {
-        darkModeMediaQuery.addEventListener('change', checkDarkMode);
-      } else if('addListener' in darkModeMediaQuery) {
-        (darkModeMediaQuery as any).addListener(checkDarkMode);
-      }
+      // Select the element you want to observe for class changes
+      const targetElement = document.body;
+
+      // Create a new instance of MutationObserver
+      const observer = new MutationObserver((mutationsList) => {
+        // Check if any mutation involves class changes
+        for(const mutation of mutationsList) {
+          if(mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            // Handle class change here
+            checkDarkMode()
+          }
+        }
+      });
+
+      // Configure the observer to watch for attribute changes
+      const observerConfig = {
+        attributes: true, // Watch for attribute changes
+        attributeFilter: ['class'] // Specify which attribute(s) to observe
+      };
+
+      // Start observing the target element
+      observer.observe(targetElement, observerConfig);
+      // if('addEventListener' in darkModeMediaQuery) {
+      //   darkModeMediaQuery.addEventListener('change', checkDarkMode);
+      // } else if('addListener' in darkModeMediaQuery) {
+      //   (darkModeMediaQuery as any).addListener(checkDarkMode);
+      // }
 
       checkDarkMode();
     } catch(err) {

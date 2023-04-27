@@ -178,7 +178,7 @@ export default class ChatTopbar {
     this.pushButtonToVerify(this.btnCall, this.verifyCallButton.bind(this, 'voice'));
     this.pushButtonToVerify(this.btnGroupCall, this.verifyVideoChatButton);
 
-    this.chatInfoContainer.append(this.btnBack, this.chatInfo, this.chatUtils);
+    this.chatInfoContainer.append(this.chatInfo, this.chatUtils);
     this.container.append(this.chatInfoContainer);
 
     if(this.pinnedMessage) {
@@ -768,6 +768,7 @@ export default class ChatTopbar {
       this.btnMute && this.btnMute.classList.toggle('hide', !isBroadcast || !canHaveSomeButtons);
       if(this.btnJoin) {
         if(isAnyChat && !this.chat.isRestricted && canHaveSomeButtons) {
+          this.btnJoin.click();
           replaceContent(this.btnJoin, i18n(isBroadcast ? 'Chat.Subscribe' : 'ChannelJoin'));
           this.btnJoin.classList.toggle('hide', !(chat as MTChat.chat)?.pFlags?.left);
         } else {

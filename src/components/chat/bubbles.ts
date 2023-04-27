@@ -1739,6 +1739,8 @@ export default class ChatBubbles {
   }
 
   public onBubblesClick = async(e: Event) => {
+
+
     let target = e.target as HTMLElement;
     let bubble: HTMLElement = null;
     try {
@@ -1932,7 +1934,7 @@ export default class ChatBubbles {
     }
 
     const nameDiv = findUpClassName(target, 'peer-title') || findUpTag(target, 'AVATAR-ELEMENT') || findUpAttribute(target, 'data-saved-from');
-    if(nameDiv && nameDiv !== bubble) {
+    if(nameDiv && nameDiv !== bubble && false) {
       target = nameDiv || target;
       const peerIdStr = target.dataset.peerId || target.getAttribute('peer') || (target as AvatarElement).peerId;
       const savedFrom = target.dataset.savedFrom;

@@ -129,9 +129,21 @@ export default class Chat extends EventListenerBase<{
   public setBackground(url: string, skipAnimation?: boolean): Promise<void> {
     const theme = themeController.getTheme();
     const themeSettings = theme.settings;
+    const backgroundColor = theme.name === 'day' ? parseInt('ffffff', 16) : parseInt('1a182d', 16);
+    theme.settings.wallpaper = {
+      '_': 'wallPaperNoFile',
+      'id': 0,
+      'pFlags': {},
+      'settings': {
+        '_': 'wallPaperSettings',
+        'background_color': backgroundColor,
+        'pFlags': {}
+      }
+    };
+    theme.settings.highlightningColor = 'hsla(237.14285714285714, 41.61971830985915%, 9.049019607843137%, .4)';
+
     const wallPaper = themeSettings.wallpaper;
     const colors = getColorsFromWallPaper(wallPaper);
-
     let item: HTMLElement;
     const isColorBackground = !!colors && !(wallPaper as WallPaper.wallPaper).slug && !wallPaper.settings.intensity;
     if(

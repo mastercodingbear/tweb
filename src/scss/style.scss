@@ -20,7 +20,7 @@ $large-screen: 1680px;
 //$large-screen: 16800px;
 
 $floating-left-sidebar: 925px;
-$messages-container-width: 728px;
+$messages-container-width: 1000px;
 
 $chat-input-size: 3.375rem;
 $chat-input-handhelds-size: 2.875rem;
@@ -541,7 +541,6 @@ pre, code, kbd, samp {
   //min-width: 100%;
   margin: 0 auto;
   max-width: $large-screen;
-
   //@include respond-to(not-handhelds) {
     height: 100%;
   //}
