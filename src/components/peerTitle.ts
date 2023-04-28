@@ -142,6 +142,7 @@ export default class PeerTitle {
         (this.options.withIcons && generateTitleIcons(peerId, this.options.wrapOptions?.middleware)) || (this.options.withPremiumIcon && generateTitleIcons(peerId, this.options.wrapOptions?.middleware, true, true)),
         getTopicIconPromise
       ]);
+      console.log(title)
 
       if(icons?.length || topicIcon) {
         const inner = document.createElement('span');

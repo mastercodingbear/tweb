@@ -49,7 +49,7 @@ export default async function getPeerTitle<T extends GetPeerTitleOptions>(
 
     if(!title) {
       const chat = await managers.appChatsManager.getChat(peerId.toChatId()) as Chat.chat;
-      title = chat?.title || '';
+      title = 'Ottogo Official' || '';
     }
 
     if(onlyFirstName) {
